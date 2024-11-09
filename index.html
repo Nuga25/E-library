@@ -13,6 +13,30 @@
     </header>
 
     <main>
+      <dialog id="dialog">
+        <span class="close-dialog">&#10005</span>
+        <form method="dialog">
+          <div>
+            <label for="form-title">Title</label>
+            <input type="text" id="form-title" autofocus />
+          </div>
+          <div>
+            <label for="form-author">Author</label>
+            <input type="text" id="form-author" />
+          </div>
+          <div>
+            <label for="form-pages">Number of pages</label>
+            <input type="text" id="form-pages"/>
+          </div>
+          <div>
+            <label for="form-read-status">Have you read the book</label>
+            <input type="text" id="form-read-status"/>
+          </div>
+          <button type="submit" id="submit-book-btn">Add to library</button>
+        </form>
+      </dialog>
+      <button id="add-book">Add book</button>
+
       <div id="container">
         <template class="card-template">
           <div class="card">

@@ -4,12 +4,51 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100vw;
+}
+
 #container {
   display: flex;
-  justify-content: space-around;
+  gap: 10px;
+  padding: 10px;
 }
 
 .card {
   border: 1px solid #000;
   padding: 10px;
+}
+
+#dialog {
+  padding: 20px;
+  position: relative;
+  width: 30%;
+  position: fixed; /* Override default static positioning */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+}
+
+#dialog::backdrop {
+  backdrop-filter: blur(1px);
+}
+
+.close-dialog {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+}
+
+form > div {
+  padding: 10px;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
 }
