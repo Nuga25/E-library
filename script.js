@@ -2,21 +2,37 @@
 const myLibrary = [];
 
 //constructor
-function Books(title, author, pages, read) {
+function Books(title, author, pages, genre, read, bookCover) {
   this.title = title;
   this.author = author;
   this.pages = pages;
+  this.genre = genre;
   this.read = read;
+  this.bookCover = bookCover;
 }
+Books.prototype.read = function () {
+  const toggle = document.querySelector(".read-status");
+  if (this.read === "yes") {
+    return toggle.checked;
+  } else {
+    return !toggle.checked;
+  }
+};
 
 //function to create new book objects and add to array(myLibrary)
-function addBookToLibrary(title, author, pages, read) {
-  const book = new Books(title, author, pages, read);
+function addBookToLibrary(title, author, pages, genre, read, bookCover) {
+  const book = new Books(title, author, pages, genre, read, bookCover);
   myLibrary.push(book);
   return book;
 }
 
-addBookToLibrary("Broken: Not a halal love story", "Fatima Bala", 298, "yes");
+addBookToLibrary(
+  "Broken: Not a halal love story",
+  "Fatima Bala",
+  298,
+  "romance",
+  "yes"
+);
 displayBook();
 
 //function to display last book entered
@@ -33,12 +49,16 @@ function displayBook() {
     const bookTitle = clone.querySelector(".title");
     const bookAuthor = clone.querySelector(".author");
     const bookPages = clone.querySelector(".pages");
+    const bookGenre = clone.querySelector(".genre");
     const bookStatus = clone.querySelector(".read-status");
+    const bookBookCover = clone.querySelector(".book-cover");
 
     bookTitle.textContent = book.title;
     bookAuthor.textContent = book.author;
     bookPages.textContent = book.pages;
+    bookGenre.textContent = book.genre;
     bookStatus.textContent = book.read;
+    bookBookCover.textContent = book.bookCover;
 
     container.appendChild(clone);
   }
@@ -57,20 +77,43 @@ closeDialog.addEventListener("click", () => {
   dialog.close();
 });
 
+//edit dialog
+const editDialog = document.querySelector(".edit-dialog");
+editDialog.addEventListener("click", () => {
+  dialog.showModal();
+});
+
 //button that submits form and adds book to library
 const submitFormButton = document.querySelector("#submit-book-btn");
 submitFormButton.addEventListener("click", (e) => {
   e.preventDefault(); //to prevent default behaviour of submit button
-  dialog.close();
 
   const title = document.querySelector("#form-title");
   const author = document.querySelector("#form-author");
   const pages = document.querySelector("#form-pages");
-  const read = document.querySelector("#form-read-status");
+  const genre = document.querySelector("#form-genre");
+  const read = document.querySelector("input[name='readStatus']:checked");
+  const bookCover = document.querySelector("#form-book-cover");
 
-  addBookToLibrary(title.value, author.value, pages.value, read.value);
-  displayBook();
+  //check for form validty
+  const form = document.querySelector("#form");
+  if (form.checkValidity()) {
+    addBookToLibrary(
+      title.value,
+      author.value,
+      pages.value,
+      genre.value,
+      read.value,
+      bookCover.files[0]
+    );
+    displayBook();
+    //close dialog
+    dialog.close();
 
-  //clear input fields after "Add to library" button is clicked
-  document.querySelector("form").reset();
+    //clear input fields after "Add to library" button is clicked
+    document.querySelector("form").reset();
+  } else {
+    //if from is invalid, trigger built-in validation messages
+    form.reportValidity();
+  }
 });
