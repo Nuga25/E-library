@@ -16,6 +16,9 @@ function addBookToLibrary(title, author, pages, read) {
   return book;
 }
 
+addBookToLibrary("Broken: Not a halal love story", "Fatima Bala", 298, "yes");
+displayBook();
+
 //function to display last book entered
 function displayBook() {
   const container = document.querySelector("#container");
@@ -69,8 +72,5 @@ submitFormButton.addEventListener("click", (e) => {
   displayBook();
 
   //clear input fields after "Add to library" button is clicked
-  title.value = "";
-  author.value = "";
-  pages.value = "";
-  read.value = "";
+  document.querySelector("form").reset();
 });

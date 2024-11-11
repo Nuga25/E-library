@@ -3,16 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Library</title>
+    <title>E-Library</title>
 
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <header>
-      <h1>Welcome to your Library</h1>
+    <header id="header">
+      <div>
+        <img src="" alt="logo">
+        <h1>E-Library</h1>
+      </div>
+      <p><em>Unlock your digital bookshelf</em></p>
     </header>
 
-    <main>
+    <main id="main">
+      <p>From Titles to Pages - Craft Your Perfect Reading List</p>
+      <button id="add-book">Add book</button>
+
       <dialog id="dialog">
         <span class="close-dialog">&#10005</span>
         <form method="dialog">
@@ -28,6 +35,10 @@
             <label for="form-pages">Number of pages</label>
             <input type="text" id="form-pages"/>
           </div>
+          <!-- <div>
+            <label for="form-pages">Genre</label>
+            <input type="text" id="form-pages"/>
+          </div> -->
           <div>
             <label for="form-read-status">Have you read the book</label>
             <input type="text" id="form-read-status"/>
@@ -35,15 +46,27 @@
           <button type="submit" id="submit-book-btn">Add to library</button>
         </form>
       </dialog>
-      <button id="add-book">Add book</button>
 
       <div id="container">
         <template class="card-template">
           <div class="card">
-            <h2 class="title"></h2>
-            <p class="author"></p>
-            <p class="pages"></p>
-            <p class="read-status"></p>
+            <div class="top-section">
+              <p>Completed: <span class="read-status"></span></p>
+              <div>
+                <span><button>Ed</button></span>
+                <span><button>De</button></span>
+              </div>
+            </div>
+            <div>
+              <h2 class="title"></h2>
+            </div>
+            <p><em>by <span class="author"></span></em></p>
+            <p>Genre: <span class="genre"></span></p>
+            <div>
+              <p><span class="pages"></span> pages</p>
+              <img src="" alt="book-icon">
+            </div>
+            <img src="" alt="book cover" class="book-cover" width="70" height="100">
           </div>
         </template>
       </div>
