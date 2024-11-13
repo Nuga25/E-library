@@ -10,12 +10,9 @@ function Books(title, author, pages, genre, read, bookCover) {
   this.read = read;
   this.bookCover = bookCover;
 }
-Books.prototype.read = function () {
-  const toggle = document.querySelector(".read-status");
+Books.prototype.updateToggle = function (checkbox) {
   if (this.read === "yes") {
-    return toggle.checked;
-  } else {
-    return !toggle.checked;
+    checkbox.checked = true;
   }
 };
 
@@ -46,6 +43,7 @@ function displayBook() {
   /*check if there is a book to display*/
   if (book) {
     const clone = document.importNode(card.content, true); //clone template
+
     const bookTitle = clone.querySelector(".title");
     const bookAuthor = clone.querySelector(".author");
     const bookPages = clone.querySelector(".pages");
@@ -60,6 +58,11 @@ function displayBook() {
     bookStatus.textContent = book.read;
     bookBookCover.textContent = book.bookCover;
 
+    //update book status to completed if book is marked as read
+    const bookCheckbox = clone.querySelector(".read-status");
+    book.updateToggle(bookCheckbox);
+
+    //append clone to the page container
     container.appendChild(clone);
   }
 }
@@ -78,10 +81,10 @@ closeDialog.addEventListener("click", () => {
 });
 
 //edit dialog
-const editDialog = document.querySelector(".edit-dialog");
-editDialog.addEventListener("click", () => {
-  dialog.showModal();
-});
+// const editDialog = document.querySelector(".edit-dialog");
+// editDialog.addEventListener("click", () => {
+//   dialog.showModal();
+// });
 
 //button that submits form and adds book to library
 const submitFormButton = document.querySelector("#submit-book-btn");
