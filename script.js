@@ -27,15 +27,6 @@ function addBookToLibrary(title, author, pages, genre, read, bookCover) {
   return book;
 }
 
-addBookToLibrary(
-  "Broken: Not a halal love story",
-  "Fatima Bala",
-  298,
-  "romance",
-  "yes"
-);
-displayBook();
-
 //function to display last book entered
 function displayBook() {
   const container = document.querySelector("#container");
@@ -60,7 +51,7 @@ function displayBook() {
     bookPages.textContent = book.pages;
     bookGenre.textContent = book.genre;
     bookStatus.textContent = book.read;
-    bookBookCover.textContent = book.bookCover;
+    bookBookCover.imageData = book.bookCover;
 
     //update book status to completed if book is marked as read
     const bookCheckbox = clone.querySelector(".read-status");
@@ -99,6 +90,7 @@ function editBook(bookDiv, editButton, book) {
       document.querySelector(".form-read-status").checked = currentBook.read;
       document.querySelector("#form-book-cover").files = currentBook.bookCover;
     }
+
     document.querySelector("#submit-book-btn").textContent = "Save";
 
     isEditMode = true;
@@ -106,6 +98,30 @@ function editBook(bookDiv, editButton, book) {
 
     dialog.showModal();
   });
+}
+
+// Function to update a book's display after editing
+function updateBookDisplay(index) {
+  const book = myLibrary[index];
+  const bookElement = document.querySelector(`.card[data-index="${index}"]`);
+
+  if (bookElement) {
+    bookElement.querySelector(".title").textContent = book.title.value;
+    bookElement.querySelector(".author").textContent = book.author.value;
+    bookElement.querySelector(".pages").textContent = book.pages.value;
+    bookElement.querySelector(".genre").textContent = book.genre.value;
+
+    // Update read status display and toggle
+    const readStatusElement = bookElement.querySelector(".read-status");
+    readStatusElement.textContent = book.read === "yes" ? "Read" : "Not read";
+    readStatusElement.checked = book.read === "yes";
+
+    // Toggle read status when checkbox is clicked
+    readStatusElement.addEventListener("change", () => {
+      book.read = readStatusElement.checked ? "yes" : "no";
+      readStatusElement.textContent = book.read === "yes" ? "Read" : "Not read";
+    });
+  }
 }
 
 //function to delete book
@@ -189,27 +205,3 @@ submitFormButton.addEventListener("click", (e) => {
     form.reportValidity();
   }
 });
-
-// Function to update a book's display after editing
-function updateBookDisplay(index) {
-  const book = myLibrary[index];
-  const bookElement = document.querySelector(`.card[data-index="${index}"]`);
-
-  if (bookElement) {
-    bookElement.querySelector(".title").textContent = book.title.value;
-    bookElement.querySelector(".author").textContent = book.author.value;
-    bookElement.querySelector(".pages").textContent = book.pages.value;
-    bookElement.querySelector(".genre").textContent = book.genre.value;
-
-    // Update read status display and toggle
-    const readStatusElement = bookElement.querySelector(".read-status");
-    readStatusElement.textContent = book.read === "yes" ? "Read" : "Not read";
-    readStatusElement.checked = book.read === "yes";
-
-    // Toggle read status when checkbox is clicked
-    readStatusElement.addEventListener("change", () => {
-      book.read = readStatusElement.checked ? "yes" : "no";
-      readStatusElement.textContent = book.read === "yes" ? "Read" : "Not read";
-    });
-  }
-}

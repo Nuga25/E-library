@@ -4,6 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>E-Library</title>
+    
+    <!--Google fonts link-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Rye&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="style.css" />
   </head>
@@ -38,10 +43,38 @@
           <div>
             <label for="form-genre">Genre</label>
             <select name="genre" id="form-genre" required>
-              <option value="romance">Romance</option>
-              <option value="fiction">Fiction</option>
-              <option value="rom-com">Rom-com</option>
-              <option value="fantasy">Fantasy</option>
+              <!-- Fiction Genres -->
+              <optgroup label="Fiction">
+                <option value="adventure">Adventure</option>
+                <option value="classics">Classics</option>
+                <option value="contemporary">Contemporary</option>
+                <option value="crime">Crime</option>
+                <option value="drama">Drama</option>
+                <option value="fantasy">Fantasy</option>
+                <option value="historical">Historical</option>
+                <option value="horror">Horror</option>
+                <option value="mystery">Mystery</option>
+                <option value="romance">Romance</option>
+                <option value="science-fiction">Science Fiction</option>
+                <option value="thriller">Thriller</option>
+                <option value="western">Western</option>
+                <option value="dystopian">Dystopian</option>
+              </optgroup>
+              
+              <!-- Non-Fiction Genres -->
+              <optgroup label="Non-Fiction">
+                <option value="autobiography">Autobiography</option>
+                <option value="biography">Biography</option>
+                <option value="cooking">Cooking</option>
+                <option value="health-wellness">Health & Wellness</option>
+                <option value="history">History</option>
+                <option value="memoir">Memoir</option>
+                <option value="philosophy">Philosophy</option>
+                <option value="psychology">Psychology</option>
+                <option value="science">Science</option>
+                <option value="self-help">Self-Help</option>
+                <option value="travel">Travel</option>
+              </optgroup>
             </select>
           </div>
           <div>
@@ -95,13 +128,15 @@
               <p><span class="pages"></span> pages</p>
               <svg class="page-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>pages</title><path d="M19 1L14 6V17L19 12.5V1M21 5V18.5C19.9 18.15 18.7 18 17.5 18C15.8 18 13.35 18.65 12 19.5V6C10.55 4.9 8.45 4.5 6.5 4.5C4.55 4.5 2.45 4.9 1 6V20.65C1 20.9 1.25 21.15 1.5 21.15C1.6 21.15 1.65 21.1 1.75 21.1C3.1 20.45 5.05 20 6.5 20C8.45 20 10.55 20.4 12 21.5C13.35 20.65 15.8 20 17.5 20C19.15 20 20.85 20.3 22.25 21.05C22.35 21.1 22.4 21.1 22.5 21.1C22.75 21.1 23 20.85 23 20.6V6C22.4 5.55 21.75 5.25 21 5M10 18.41C8.75 18.09 7.5 18 6.5 18C5.44 18 4.18 18.19 3 18.5V7.13C3.91 6.73 5.14 6.5 6.5 6.5C7.86 6.5 9.09 6.73 10 7.13V18.41Z" /></svg>
             </div>
-            <img src="./bernard-hermant--IwbJJfoC80-unsplash.jpg" alt="book cover" class="book-cover" id="book-cover-preview" width="70" height="100">
+            <div class="imageContainer">
+              <img src="" alt="book cover" class="book-cover" id="book-cover-preview" width="70" height="100">
+            </div>
           </div>
         </template>
       </div>
     </main>
     <footer>
-      <small>Designed and coded by <a href="https://x.com/ifeeee___">ifeeee</a> copyright&copy;2024</small>
+      <small>Designed and coded by <a href="https://x.com/ifeeee___" target="_blank">ifeeee</a> copyright&copy;2024</small>
     </footer>
     <script src="script.js"></script>
   </body>
