@@ -122,7 +122,8 @@ svg {
 
 .top-section + div + p,
 .top-section + div + p + p,
-.top-section + div + p + p + div {
+.top-section + div + p + p + div,
+.top-section + div + p + p + div + p {
   padding: 5px 0;
 }
 

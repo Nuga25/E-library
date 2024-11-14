@@ -13,6 +13,8 @@ function Books(title, author, pages, genre, read, bookCover) {
 Books.prototype.updateToggle = function (checkbox) {
   if (this.read === "yes") {
     checkbox.checked = true;
+  } else {
+    checkbox.checked = false;
   }
 };
 
@@ -26,6 +28,8 @@ function addBookToLibrary(title, author, pages, genre, read, bookCover) {
   myLibrary.push(book);
   return book;
 }
+addBookToLibrary("Demo Book", "Demo author", 270, "crime", "yes");
+displayBook();
 
 //function to display last book entered
 function displayBook() {
@@ -44,6 +48,7 @@ function displayBook() {
     const bookPages = clone.querySelector(".pages");
     const bookGenre = clone.querySelector(".genre");
     const bookStatus = clone.querySelector(".read-status");
+    const bookReadStatus = clone.querySelector(".read-status-text");
     const bookBookCover = clone.querySelector(".book-cover");
 
     bookTitle.textContent = book.title;
@@ -51,11 +56,21 @@ function displayBook() {
     bookPages.textContent = book.pages;
     bookGenre.textContent = book.genre;
     bookStatus.textContent = book.read;
+    bookReadStatus.textContent = book.read;
     bookBookCover.imageData = book.bookCover;
 
     //update book status to completed if book is marked as read
     const bookCheckbox = clone.querySelector(".read-status");
     book.updateToggle(bookCheckbox);
+
+    bookCheckbox.addEventListener("change", () => {
+      // Update the book object
+      book.read = bookCheckbox.checked ? "yes" : "no";
+
+      // Update the read status text and the display
+      bookReadStatus.textContent = book.read === "yes" ? "Yes" : "No";
+      bookStatus.textContent = book.read === "yes" ? "Yes" : "No";
+    });
 
     //handles book deletion
     const bookDiv = clone.querySelector(".card");
@@ -169,6 +184,10 @@ submitFormButton.addEventListener("click", (e) => {
   const pages = document.querySelector("#form-pages");
   const genre = document.querySelector("#form-genre");
   const read = document.querySelector("input[name='readStatus']:checked");
+  const readStatusText = document.querySelector(
+    "input[name='readStatus']:checked"
+  );
+  console.log(readStatusText.value);
   const bookCoverInput = document.querySelector("#form-book-cover");
 
   let bookCover = null;
@@ -189,7 +208,7 @@ submitFormButton.addEventListener("click", (e) => {
         author.value,
         pages.value,
         genre.value,
-        read.value,
+        readStatusText.value,
         bookCoverInput.files[0]
       );
       displayBook();
