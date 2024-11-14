@@ -93,24 +93,36 @@ function editBook(bookDiv, editButton, book) {
   bookDiv.dataset.index = index;
 
   editButton.addEventListener("click", () => {
-    // Always retrieve the latest book values from the library
-    const currentBook = myLibrary[index];
-
-    if (isEditMode === true && editIndex === index) {
-      //populate the input fields with current value of index
-      document.querySelector("#form-title").value = currentBook.title;
-      document.querySelector("#form-author").value = currentBook.author;
-      document.querySelector("#form-pages").value = currentBook.pages;
-      document.querySelector("#form-genre").value = currentBook.genre;
-      document.querySelector(".form-read-status").checked = currentBook.read;
-      document.querySelector("#form-book-cover").files = currentBook.bookCover;
-    }
-
-    document.querySelector("#submit-book-btn").textContent = "Save";
-
+    // Update global flags
     isEditMode = true;
     editIndex = index;
 
+    // Always retrieve the latest book values from the library
+    const currentBook = myLibrary[index];
+
+    // Debugging to verify that the current book data is correct
+    console.log("Editing book:", currentBook);
+
+    //populate the input fields with current value of index
+    document.querySelector("#form-title").value = currentBook.title;
+    document.querySelector("#form-author").value = currentBook.author;
+    document.querySelector("#form-pages").value = currentBook.pages;
+    document.querySelector("#form-genre").value = currentBook.genre;
+
+    const read__ = document.querySelector(".form-read-status");
+    if (read__) {
+      read__.checked = currentBook.read === "yes"; // Ensure it's checked if read is "yes"
+    }
+
+    document.querySelector("#form-book-cover").value = "";
+
+    // Debugging to verify the inputs are populated correctly
+    console.log("Form populated. Title: ", currentBook.title);
+
+    // Set the submit button text to "Save" for edit mode
+    document.querySelector("#submit-book-btn").textContent = "Save";
+
+    // Show the dialog
     dialog.showModal();
   });
 }
@@ -125,6 +137,13 @@ function updateBookDisplay(index) {
     bookElement.querySelector(".author").textContent = book.author.value;
     bookElement.querySelector(".pages").textContent = book.pages.value;
     bookElement.querySelector(".genre").textContent = book.genre.value;
+
+    // Update the read status text element
+    const readStatusTextElement =
+      bookElement.querySelector(".read-status-text");
+    if (readStatusTextElement) {
+      readStatusTextElement.textContent = book.read === "yes" ? "Yes" : "No";
+    }
 
     // Update read status display and toggle
     const readStatusElement = bookElement.querySelector(".read-status");
@@ -187,7 +206,6 @@ submitFormButton.addEventListener("click", (e) => {
   const readStatusText = document.querySelector(
     "input[name='readStatus']:checked"
   );
-  console.log(readStatusText.value);
   const bookCoverInput = document.querySelector("#form-book-cover");
 
   let bookCover = null;
