@@ -1,22 +1,25 @@
 //array to store books
 const myLibrary = [];
 
-//constructor
-function Books(title, author, pages, genre, read, bookCover) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.genre = genre;
-  this.read = read;
-  this.bookCover = bookCover;
-}
-Books.prototype.updateToggle = function (checkbox) {
-  if (this.read === "yes") {
-    checkbox.checked = true;
-  } else {
-    checkbox.checked = false;
+//class
+class Books {
+  constructor(title, author, pages, genre, read, bookCover) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.genre = genre;
+    this.read = read;
+    this.bookCover = bookCover;
   }
-};
+
+  updateToggle(checkbox) {
+    if (this.read === "yes") {
+      checkbox.checked = true;
+    } else {
+      checkbox.checked = false;
+    }
+  }
+}
 
 // Global flag for tracking edit mode and index of book being edited
 let isEditMode = false;
